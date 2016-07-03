@@ -26,17 +26,20 @@ public class TestBeanTwo {
     @DataFileMappedField(mappedToColumnName = "status", mappedToFieldType = "String")
     private String status;
 
+    private String orderCounterSide;
+
     public TestBeanTwo(){
 
     }
 
-    public TestBeanTwo(Integer stockId, String side, String company, Integer quantity, Integer remainingQuantity, String status) {
+    public TestBeanTwo(Integer stockId, String side, String company, Integer quantity, Integer remainingQuantity, String status, String orderCounterStatus) {
         this.stockId = stockId;
         this.side = side;
         this.company = company;
         this.quantity = quantity;
         this.remainingQuantity = remainingQuantity;
         this.status = status;
+        this.orderCounterSide = orderCounterStatus;
     }
 
     public Integer getStockId() {
@@ -85,6 +88,14 @@ public class TestBeanTwo {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getOrderCounterSide() {
+        return orderCounterSide;
+    }
+
+    public void setOrderCounterSide(String orderCounterSide) {
+        this.orderCounterSide = orderCounterSide;
     }
 
     @Override

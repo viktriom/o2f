@@ -5,6 +5,7 @@ import com.vt.bean.TestBeanTwo;
 import com.vt.data.PersistenceHandler;
 import com.vt.data.PersistenceHandlerFactory;
 import com.vt.o2f.PersistenceProperties;
+import com.vt.properties.ApplicationProperties;
 import com.vt.util.PropertyReader;
 import org.junit.Before;
 
@@ -36,17 +37,17 @@ public class PersistenceTestSetUp {
 
 
     private void initializePersistenceSystem() {
-        PersistenceProperties.setDataFileDelimiter(",");
-        PersistenceProperties.setDataFileDirectory("");
-        PersistenceProperties.setGetterMethodPrefix("get");
-        PersistenceProperties.setSetterMethodPrefix("set");
-        PersistenceProperties.setIsFirstRowHeader(true);
+        PersistenceProperties.setDataFileDelimiter(ApplicationProperties.getTraderDataFileDelimiter());
+        PersistenceProperties.setDataFileDirectory(ApplicationProperties.getDataFileDirectory());
+        PersistenceProperties.setGetterMethodPrefix(ApplicationProperties.getGetterMethodPrefix());
+        PersistenceProperties.setSetterMethodPrefix(ApplicationProperties.getSetterMethodPrefix());
+        PersistenceProperties.setIsFirstRowHeader(ApplicationProperties.getIsFirstRowHeader());
         PersistenceHandlerFactory factory = new PersistenceHandlerFactory();
         persistenceHandler = factory.getPersistenceHandler("File");
     }
 
     protected void prepareTestBeans(){
-        testBeanOneList = new LinkedList<TestBeanOne>();
+        testBeanOneList = new LinkedList<>();
         TestBeanOne testBeanOne;
         testBeanOne = new TestBeanOne(1,"Buy","ABC",10);
         testBeanOneList.add(0, testBeanOne);
@@ -59,17 +60,17 @@ public class PersistenceTestSetUp {
         testBeanOne = new TestBeanOne(5,"Buy","XYZ",8);
         testBeanOneList.add(4, testBeanOne);
 
-        orderStatusList = new LinkedList<Object>();
+        orderStatusList = new LinkedList<>();
         TestBeanTwo testBeanTwo;
-        testBeanTwo = new TestBeanTwo(1,"Buy","ABC",10,0,"Closed");
+        testBeanTwo = new TestBeanTwo(1,"Buy","ABC",10,0,"Closed","Sell");
         orderStatusList.add(0, testBeanTwo);
-        testBeanTwo = new TestBeanTwo(2,"Sell","XYZ",15,0,"Closed");
+        testBeanTwo = new TestBeanTwo(2,"Sell","XYZ",15,0,"Closed","Buy");
         orderStatusList.add(1, testBeanTwo);
-        testBeanTwo = new TestBeanTwo(3,"Sell","ABC",13,3,"Open");
+        testBeanTwo = new TestBeanTwo(3,"Sell","ABC",13,3,"Open","Buy");
         orderStatusList.add(2, testBeanTwo);
-        testBeanTwo = new TestBeanTwo(4,"Buy","XYZ",10,0,"Closed");
+        testBeanTwo = new TestBeanTwo(4,"Buy","XYZ",10,0,"Closed","Sell");
         orderStatusList.add(3, testBeanTwo);
-        testBeanTwo = new TestBeanTwo(5,"Buy","XYZ",8,3,"Open");
+        testBeanTwo = new TestBeanTwo(5,"Buy","XYZ",8,3,"Open","Sell");
         orderStatusList.add(4, testBeanTwo);
     }
 

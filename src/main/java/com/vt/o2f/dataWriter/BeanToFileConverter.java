@@ -62,7 +62,9 @@ public class BeanToFileConverter {
             for (Object obj : objects) {
                 StringBuilder recordBuilder = new StringBuilder();
                 for (Field field : dataBean.getDeclaredFields()) {
-                    prepareDataRowAndWriteToFile(obj, field, recordBuilder);
+                    if(field.isAnnotationPresent(DataFileMappedField.class)) {
+                        prepareDataRowAndWriteToFile(obj, field, recordBuilder);
+                    }
                 }
                 dataFileWriter.writeEmptyLine();
                 dataFileWriter.writeStringToFile(recordBuilder.toString().substring(1, recordBuilder.toString().length()));
@@ -86,7 +88,7 @@ public class BeanToFileConverter {
             log.error("UNABLE to invoke getter method\'"+methodName+"\' for the field \'"+field.getName()+"\'");
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            log.error("The getter method\'"+methodName+"\' NOT found for the field \'"+field.getName()+"\'");
+            log.error("UNABLE to access the getter method\'"+methodName+"\' NOT found for the field \'"+field.getName()+"\'");
             e.printStackTrace();
         }
 
@@ -102,7 +104,7 @@ public class BeanToFileConverter {
 
     private void prepareHeaderFromBean(Field field, StringBuilder fileHeaderBuilder) {
         if(field.isAnnotationPresent(DataFileMappedField.class)){
-            DataFileMappedField annotation = (DataFileMappedField)field.getAnnotation(DataFileMappedField.class);
+            DataFileMappedField annotation = field.getAnnotation(DataFileMappedField.class);
             fileHeaderBuilder.append(",");
             fileHeaderBuilder.append(annotation.mappedToColumnName());
         }
