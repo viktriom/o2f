@@ -12,7 +12,7 @@ public class DataFileWriter {
 
     private String completeFileName;
     private BufferedWriter bufferedWriter;
-
+     
 
     public DataFileWriter(String completeFilename) throws IOException {
         this.completeFileName = completeFilename;

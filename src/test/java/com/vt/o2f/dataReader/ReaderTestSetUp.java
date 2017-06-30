@@ -10,7 +10,7 @@ import org.junit.Before;
 public class ReaderTestSetUp extends PersistenceTestSetUp {
 
     protected FileDataReader dataReader;
-    protected FileDataStore dataStore;
+    protected DataTable dataStore;
 
     @Before
     public void setUp() throws Exception {

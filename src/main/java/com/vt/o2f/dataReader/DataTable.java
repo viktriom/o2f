@@ -5,13 +5,13 @@ import java.util.*;
 /**
  * Created by sonu on 25/06/16.
  */
-public class FileDataStore {
+public class DataTable {
 
-    private Map<String,List<String>> dataStore;
+    private Map<String,List<String>> table;
 
 
-    public FileDataStore() {
-        dataStore = new HashMap<String, List<String>>();
+    public DataTable() {
+        table = new HashMap<>();
     }
 
     public void setValueForHeader(String header, String value, int index){
@@ -23,7 +23,7 @@ public class FileDataStore {
     }
 
     public List<String> getValuesForHeader(String header){
-        return dataStore.get(header);
+        return table.get(header);
     }
 
     public String getValueForHeaderAtIndex(String header, int index){
@@ -31,7 +31,7 @@ public class FileDataStore {
     }
 
     private String validateHeaderAndFindValue(String header, int index){
-        List<String> values = dataStore.get(header);
+        List<String> values = table.get(header);
         if(values == null||values.size() == 0)
             return null;
         else
@@ -41,23 +41,26 @@ public class FileDataStore {
     private void addNewHeaderAndValue(String header, String value, int index) {
         List<String> values = new LinkedList<String>();
         values.add(index,value);
-        dataStore.put(header,values);
+        table.put(header,values);
     }
 
     private void addValueToExistingHeader(String header, String value, int index) {
-        dataStore.get(header).add(index, value);
+        table.get(header).add(index, value);
     }
 
+    public void saveTableDataToFile(){
+    	
+    }
 
     public boolean isHeaderPresent(String headerName){
-        return dataStore.get(headerName) != null;
+        return table.get(headerName) != null;
     }
 
     public void clearDataInDataStore(){
-        dataStore.clear();
+        table.clear();
     }
 
     public Set<String> getHeaderNames(){
-        return dataStore.keySet();
+        return table.keySet();
     }
 }

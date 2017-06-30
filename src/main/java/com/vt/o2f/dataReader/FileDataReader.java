@@ -7,6 +7,8 @@ import java.io.*;
 
 /**
  * Created by sonu on 25/06/16.
+ * Purpose of this class is to read a file and prepare an in memory data structure in the form of a data Table.
+ *  Takes input of a file name to read from 
  */
 public class FileDataReader {
 
@@ -16,9 +18,10 @@ public class FileDataReader {
     private int numberOfRowsInFile;
     private String completeFileName;
     private BufferedReader reader;
-    private FileDataStore dataStore;
+    private DataTable dataStore;
     private String delimiter;
     private String[] columnNames;
+    private Integer batchSize;
 
 
     public FileDataReader(String completeFileName, String delimiter) {
@@ -33,14 +36,14 @@ public class FileDataReader {
 
     private void initialize(){
         reader = null;
-        dataStore = new FileDataStore();
+        dataStore = new DataTable();
         numberOfColumnsInFile = 0;
         numberOfRowsInFile = 0;
         columnNames = null;
     }
 
 
-    public FileDataStore readFile(){
+    public DataTable readFile(){
         try{
             initialize();
             validateFileName();
@@ -68,7 +71,7 @@ public class FileDataReader {
     private void processRecord(String currentLine) {
         String[] fields = currentLine.split(delimiter);
         if(fields.length < columnNames.length)
-            return;
+            return;c
         int i;
         for(i =0; i < columnNames.length; i++){
             dataStore.setValueForHeader(columnNames[i],fields[i],numberOfRowsInFile);
@@ -138,4 +141,13 @@ public class FileDataReader {
     public void setCompleteDataFileName(String completeFileName) {
         this.completeFileName = completeFileName;
     }
+
+	public Integer getBatchSize() {
+		return batchSize;
+	}
+
+	public void setBatchSize(Integer batchSize) {
+		this.batchSize = batchSize;
+	}
+    
 }

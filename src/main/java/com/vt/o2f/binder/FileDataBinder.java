@@ -7,7 +7,7 @@ import com.vt.o2f.annotations.DataFileMappedField;
 import com.vt.o2f.converters.ConversionFactory;
 import com.vt.o2f.converters.Converter;
 import com.vt.o2f.dataReader.FileDataReader;
-import com.vt.o2f.dataReader.FileDataStore;
+import com.vt.o2f.dataReader.DataTable;
 import com.vt.o2f.exceptions.UnmappedBeanException;
 import com.vt.o2f.util.PersistenceUtil;
 import org.apache.log4j.Logger;
@@ -27,7 +27,7 @@ public class FileDataBinder {
     private Logger log = Logger.getLogger(FileDataBinder.class);
 
     private String fullyQualifiedClassName;
-    private FileDataStore fileDataStore;
+    private DataTable fileDataStore;
     private FileDataReader fileDataReader;
     private Class dataBean;
     private String dataFileName;
@@ -137,11 +137,11 @@ public class FileDataBinder {
         this.fullyQualifiedClassName = fullyQualifiedClassName;
     }
 
-    public FileDataStore getFileDataStore() {
+    public DataTable getFileDataStore() {
         return fileDataStore;
     }
 
-    public void setFileDataStore(FileDataStore fileDataStore) {
+    public void setFileDataStore(DataTable fileDataStore) {
         this.fileDataStore = fileDataStore;
     }
 
